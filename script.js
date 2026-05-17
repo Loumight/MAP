@@ -1,7 +1,7 @@
 // ========= AUDIO MANAGER =========
 let currentAudio = null;
 
-function playTrack(src, loop = true, vol = 0.6) {
+function playTrack(src, loop = true, vol = 0.5) {
   if (!src) return;
   if (currentAudio) {
     currentAudio.pause();
@@ -10,7 +10,12 @@ function playTrack(src, loop = true, vol = 0.6) {
   const audio = new Audio(src);
   audio.loop = loop;
   audio.volume = vol;
+
+  //delay bcs its playing too quick
+  setTimeout(() => { 
   audio.play().catch((e) => console.log("Autoplay blocked — click first"));
+  } , 1000);
+
   currentAudio = audio;
   updatePlayerUI(src);
 }
@@ -24,36 +29,29 @@ function stopAudio() {
 }
 
 // ========= MUSIC PLAYER UI =========
-const playButton = document.getElementById('play');
-const playIcon = playButton.querySelector('i');
-const titleElement = document.getElementById('title');
-const trackTimeElement = document.getElementById('track-time');
-const progressFilled = document.querySelector('.progress-filled');
+const playButton = document.getElementById("play");
+const playIcon = playButton.querySelector("i");
+const titleElement = document.getElementById("title");
+const trackTimeElement = document.getElementById("track-time");
+const progressFilled = document.querySelector(".progress-filled");
+// intarctive progress bar ?
+const progressBar = document.querySelector('.progress-bar');
 
 function updatePlayerUI(src) {
   if (!src) {
-    titleElement.textContent = 'No Track Playing';
-    trackTimeElement.textContent = '0:00';
-    progressFilled.style.width = '0%';
-    playIcon.classList.replace('fa-pause', 'fa-play');
+    titleElement.textContent = "No Track Playing";
+    trackTimeElement.textContent = "0:00";
+    progressFilled.style.width = "0%";
+    playIcon.classList.replace("fa-pause", "fa-play");
     return;
   }
-  // test
-  const filename = src.split('/').pop().replace('.mp3', '').replace('.wav', '');
+ 
+  const filename = src.split("/").pop().replace(".mp3", "").replace(".wav", "");
   titleElement.textContent = filename;
-  /*
-  titleElement.classList.remove('scrolling');
-  setTimeout(() => {
-    const container = titleElement.parentElement.parentElement; // .track-title
-    if (titleElement.offsetWidth > container.offsetWidth) {
-      titleElement.classList.add('scrolling');
-    }
-  }, 0);
-  */
   if (currentAudio) {
-    currentAudio.addEventListener('timeupdate', updateProgress);
-    currentAudio.addEventListener('ended', () => {
-      playIcon.classList.replace('fa-pause', 'fa-play');
+    currentAudio.addEventListener("timeupdate", updateProgress);
+    currentAudio.addEventListener("ended", () => {
+      playIcon.classList.replace("fa-pause", "fa-play");
     });
   }
 }
@@ -69,40 +67,68 @@ function updateProgress() {
 function formatTime(seconds) {
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
+  return `${mins}:${secs.toString().padStart(2, "0")}`;
 }
 
-playButton.addEventListener('click', () => {
+// Click on progress bar to seek BANG I MADE TS IM SO GOOD YPPE
+progressBar.addEventListener("click", seekTo);
+function seekTo(clickEvent) {
+  const progress = clickEvent.offsetX / progressBar.clientWidth;
+  currentAudio.currentTime = progress * currentAudio.duration;
+
+  progressFilled.style.width = `${progress * 100}%`;
+
+  currentAudio.currentTime = progress * currentAudio.duration;
+}
+
+// make it pauseable/playable space bar
+document.addEventListener("keydown", (e) => {
+
+  if (e.code === "Space") {
+    e.preventDefault();
+    togglePlayPause();
+  }
+});
+
+playButton.addEventListener("click", () => {
+  togglePlayPause();
+});
+
+
+function togglePlayPause() {
   if (!currentAudio) return;
   if (currentAudio.paused) {
     currentAudio.play();
-    playIcon.classList.replace('fa-play', 'fa-pause');
+    playIcon.classList.replace("fa-play", "fa-pause");
   } else {
     currentAudio.pause();
-    playIcon.classList.replace('fa-pause', 'fa-play');
+    playIcon.classList.replace("fa-pause", "fa-play");
   }
-});
+};
 
 // COOLDOWN FOLK PLEASE I SUCK BUNS AT JS IM ACTUALLY GONNA LEARN TS CAUSE I DIDNT REALISE HOW BOOTY CHEEKS AI WAS HOLYYY//
 
 let globalCooldown = false;
 let isTransitioning = false;
 
-document.addEventListener("click", (e) => {
-  if (globalCooldown || isTransitioning) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    console.log("Blocked");
-    return;
-  }
+document.addEventListener(
+  "click",
+  (e) => {
+    if (globalCooldown || isTransitioning) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      console.log("Blocked");
+      return;
+    }
 
-  globalCooldown = true;
+    globalCooldown = true;
 
-  setTimeout(() => {
-    globalCooldown = false;
-  }, 300);
-
-}, true);
+    setTimeout(() => {
+      globalCooldown = false;
+    }, 300);
+  },
+  true,
+);
 
 // absolute cinema son lets flipping go this global cooldown is #copyrighted //
 
@@ -114,59 +140,69 @@ const stations = [
     time: "09:00",
     platform: "Plat. 1",
     stationImage: "img/legreen.png",
-    stationAudio: "mptree/temmy.mp3",
-    outsideImage: "https://placehold.co/1920x1080/2a2a2a/999999?text=CENTRAL+YARD",
+    stationAudio: "mptree/temmylongnamefiletest.mp3",
+    outsideImage:
+      "https://placehold.co/1920x1080/2a2a2a/999999?text=CENTRAL+YARD",
     outsideAudio: "mptree/sanic.wav",
     outsideDesc: "Empty tracks. A single streetlamp. Distant city hum.",
-    tintColor: "#ffcf4a"
+    tintColor: "#ffcf4a",
   },
   {
     id: "cliffs",
     name: "COASTAL CLIFFS",
     time: "09:45",
     platform: "Plat. 3",
-    stationImage: "https://preview.redd.it/i-am-so-excited-to-have-big-underwater-areas-v0-kz1o0qplm2mg1.png?width=1080&crop=smart&auto=webp&s=472a15dcb16115ec102adc786319795b456f7d25",
+    stationImage:
+      "https://preview.redd.it/i-am-so-excited-to-have-big-underwater-areas-v0-kz1o0qplm2mg1.png?width=1080&crop=smart&auto=webp&s=472a15dcb16115ec102adc786319795b456f7d25",
     stationAudio: "",
-    outsideImage: "https://placehold.co/1920x1080/3a6a5a/aaffcc?text=COASTAL+CLIFFS",
+    outsideImage:
+      "https://placehold.co/1920x1080/3a6a5a/aaffcc?text=COASTAL+CLIFFS",
     outsideAudio: "",
     outsideDesc: "Wind off the sea. Gulls circling. Infinite horizon.",
-    tintColor: "#6ec8ff"
+    tintColor: "#6ec8ff",
   },
   {
     id: "forest",
     name: "WHISPERING FOREST",
     time: "10:15",
     platform: "Plat. 5",
-    stationImage: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/hollow-knight-silksong/5/54/Hollow_Knight_Silksong_-_DeepDocksSecrets1.jpg",
+    stationImage:
+      "https://oyster.ignimgs.com/mediawiki/apis.ign.com/hollow-knight-silksong/5/54/Hollow_Knight_Silksong_-_DeepDocksSecrets1.jpg",
     stationAudio: "",
-    outsideImage: "https://placehold.co/1920x1080/2a5a3a/aaffaa?text=DEEP+FOREST",
+    outsideImage:
+      "https://placehold.co/1920x1080/2a5a3a/aaffaa?text=DEEP+FOREST",
     outsideAudio: "",
     outsideDesc: "Sunlight through canopy. Moss and memory. Unseen footsteps.",
-    tintColor: "#7acc5e"
+    tintColor: "#7acc5e",
   },
   {
     id: "park",
     name: "ABANDONED PARK",
     time: "11:00",
     platform: "Plat. 8",
-    stationImage: "https://placehold.co/1920x1080/4a2a3a/cfaacc?text=PARK+STATION",
+    stationImage:
+      "https://placehold.co/1920x1080/4a2a3a/cfaacc?text=PARK+STATION",
     stationAudio: "",
-    outsideImage: "https://placehold.co/1920x1080/5a3a4a/ffaacc?text=AMUSEMENT+PARK",
+    outsideImage:
+      "https://placehold.co/1920x1080/5a3a4a/ffaacc?text=AMUSEMENT+PARK",
     outsideAudio: "",
-    outsideDesc: "Ferris wheel frozen. Weeds through the tracks. Faint calliope.",
-    tintColor: "#d97a2b"
+    outsideDesc:
+      "Ferris wheel frozen. Weeds through the tracks. Faint calliope.",
+    tintColor: "#d97a2b",
   },
   {
     id: "lake",
     name: "GLASS LAKE",
     time: "11:45",
     platform: "Plat. 5",
-    stationImage: "https://placehold.co/1920x1080/2a3f5a/aacdff?text=LAKE+STATION",
+    stationImage:
+      "https://placehold.co/1920x1080/2a3f5a/aacdff?text=LAKE+STATION",
     stationAudio: "",
-    outsideImage: "https://placehold.co/1920x1080/3a5f8a/aaeeff?text=GLASS+LAKE",
+    outsideImage:
+      "https://placehold.co/1920x1080/3a5f8a/aaeeff?text=GLASS+LAKE",
     outsideAudio: "",
     outsideDesc: "Mirror water. No ripples. No birds. Submerged chords.",
-    tintColor: "#88ccff"
+    tintColor: "#88ccff",
   },
 ];
 
@@ -235,42 +271,40 @@ function closeMap() {
 
 // ========= TRANSITION WITH SLIDING TRAIN =========
 async function transitionTo(targetView, options = {}) {
-
   if (isTransitioning) return;
   isTransitioning = true;
 
   const { type = "default" } = options;
   const trainSprite = document.getElementById("trainSprite");
-  
+
   return new Promise(async (resolve) => {
-if (type === "train" && trainSprite) {
-    trainSprite.style.display = "block";
-    
+    if (type === "train" && trainSprite) {
+      trainSprite.style.display = "block";
 
-  // remember to change when i update the train sprite thingo!!! 
-    await new Promise(r => setTimeout(r, 50));
-    trainSprite.style.left = "-10%";
-    await new Promise(r => setTimeout(r, 800));
-    
-    trainSprite.style.left = "120%";
-    await new Promise(r => setTimeout(r, 500));
-    trainSprite.style.display = "none";
+      // remember to change when i update the train sprite thingo!!!
+      await new Promise((r) => setTimeout(r, 50));
+      trainSprite.style.left = "-10%";
+      await new Promise((r) => setTimeout(r, 800));
 
-    trainSprite.style.left = "-200%";
-}
-    
+      trainSprite.style.left = "120%";
+      await new Promise((r) => setTimeout(r, 500));
+      trainSprite.style.display = "none";
+
+      trainSprite.style.left = "-200%";
+    }
+
     // Black screen wipe
     transitionOverlay.classList.add("active");
     if (type === "train") {
       transitionOverlay.classList.add("train");
     }
-    
+
     setTimeout(() => {
       document.querySelectorAll(".fullscreen").forEach((view) => {
         view.classList.remove("active-view");
       });
       targetView.classList.add("active-view");
-      
+
       setTimeout(() => {
         transitionOverlay.classList.remove("active");
         transitionOverlay.classList.remove("train");
@@ -314,55 +348,57 @@ function buildAllStations() {
 
     // List of ALL possible departure rows with TEXT data
     const allDepartureRows = [
-      { 
-        img: "img/train1.png", 
-        destId: "cliffs", 
-        destName: "COASTAL CLIFFS", 
-        time: "09:45", 
-        platform: "Plat. 3", 
+      {
+        img: "img/train1.png",
+        destId: "cliffs",
+        destName: "COASTAL CLIFFS",
+        time: "09:45",
+        platform: "Plat. 3",
         status: "On Time",
-        statusColor: "#4caf50"
+        statusColor: "#4caf50",
       },
-      { 
-        img: "img/train2.png", 
-        destId: "forest", 
-        destName: "WHISPERING FOREST", 
-        time: "10:15", 
-        platform: "Plat. 5", 
+      {
+        img: "img/train2.png",
+        destId: "forest",
+        destName: "WHISPERING FOREST",
+        time: "10:15",
+        platform: "Plat. 5",
         status: "On Time",
-        statusColor: "#4caf50"
+        statusColor: "#4caf50",
       },
-      { 
-        img: "img/train3.png", 
-        destId: "park", 
-        destName: "ABANDONED PARK", 
-        time: "11:00", 
-        platform: "Plat. 8", 
+      {
+        img: "img/train3.png",
+        destId: "park",
+        destName: "ABANDONED PARK",
+        time: "11:00",
+        platform: "Plat. 8",
         status: "Delayed",
-        statusColor: "#ff9800"
+        statusColor: "#ff9800",
       },
-      { 
-        img: "img/train4.png", 
-        destId: "lake", 
-        destName: "GLASS LAKE", 
-        time: "11:45", 
-        platform: "Plat. 5", 
+      {
+        img: "img/train4.png",
+        destId: "lake",
+        destName: "GLASS LAKE",
+        time: "11:45",
+        platform: "Plat. 5",
         status: "On Time",
-        statusColor: "#4caf50"
+        statusColor: "#4caf50",
       },
-      { 
-        img: "img/train5.png", 
-        destId: "central", 
-        destName: "CENTRAL STATION", 
-        time: "09:00", 
-        platform: "Plat. 1", 
+      {
+        img: "img/train5.png",
+        destId: "central",
+        destName: "CENTRAL STATION",
+        time: "09:00",
+        platform: "Plat. 1",
         status: "On Time",
-        statusColor: "#4caf50"
+        statusColor: "#4caf50",
       },
     ];
 
     // Filter out the row that matches the current station
-    const departureRows = allDepartureRows.filter(row => row.destId !== station.id);
+    const departureRows = allDepartureRows.filter(
+      (row) => row.destId !== station.id,
+    );
 
     // Add rows to contentDiv with TEXT OVERLAY
     departureRows.forEach((row) => {
@@ -373,27 +409,27 @@ function buildAllStations() {
       rowContainer.style.width = "100%";
       rowContainer.style.cursor = "pointer";
       rowContainer.style.marginBottom = "8px";
-      
+
       // The image (your train1-5.png)
       const rowImg = document.createElement("img");
       rowImg.src = row.img;
       rowImg.className = "departure-row-img";
       rowImg.style.width = "100%";
       rowImg.style.display = "block";
-      
+
       // Text overlay div
       const textOverlay = document.createElement("div");
       textOverlay.className = "departure-text-overlay";
       textOverlay.innerHTML = `
-        <span class="overlay-time" style="color: ${station.tintColor || '#ffcf4a'}">${row.time}</span>
+        <span class="overlay-time" style="color: ${station.tintColor || "#ffcf4a"}">${row.time}</span>
         <span class="overlay-destination">${row.destName}</span>
         <span class="overlay-platform">${row.platform}</span>
         <span class="overlay-status" style="color: ${row.statusColor}">${row.status}</span>
       `;
-      
+
       rowContainer.appendChild(rowImg);
       rowContainer.appendChild(textOverlay);
-      
+
       rowContainer.addEventListener("click", () => {
         const targetStation = stations.find((s) => s.id === row.destId);
         if (targetStation) {
@@ -402,7 +438,7 @@ function buildAllStations() {
           goToStation(targetStation, true);
         }
       });
-      
+
       rowContainer.addEventListener("mouseenter", () => {
         rowContainer.style.transform = "scale(0.99)";
         rowContainer.style.transition = "transform 0.1s";
@@ -410,19 +446,21 @@ function buildAllStations() {
       rowContainer.addEventListener("mouseleave", () => {
         rowContainer.style.transform = "scale(1)";
       });
-      
+
       contentDiv.appendChild(rowContainer);
     });
 
     // Assemble
     frameDiv.appendChild(contentDiv);
     boardContainer.appendChild(frameDiv);
-    
+
     // Toggle button functionality
     toggleBtn.addEventListener("click", () => {
       const isVisible = boardContainer.style.display !== "none";
       boardContainer.style.display = isVisible ? "none" : "flex";
-      toggleBtn.innerHTML = isVisible ? "📋 SHOW DEPARTURES ▼" : "📋 HIDE DEPARTURES ▲";
+      toggleBtn.innerHTML = isVisible
+        ? "📋 SHOW DEPARTURES ▼"
+        : "📋 HIDE DEPARTURES ▲";
     });
 
     // Map icon
@@ -580,7 +618,9 @@ function init() {
     currentStationId = "central";
   }
 
-  console.log("✅ All features added: dropdown, train animation, per-station tinting");
+  console.log(
+    "✅ All features added: dropdown, train animation, per-station tinting",
+  );
   console.log("📍 Your train1-5.png images are preserved");
 }
 

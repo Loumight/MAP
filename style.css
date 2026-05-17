@@ -460,33 +460,38 @@ body {
 }
 
 .track-title {
-  min-width: 0;
+  position: relative;
+  width: var(--w);
   overflow: hidden;
+  --w: 18em;
+  height: 3rem;
 }
 
 .track-title-inner {
-  display: inline-block;
-  white-space: nowrap;
   font: 700 2rem Quantico;
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1px;
   color: rgba(255, 255, 255, 0.8);
+
+  --size: 9em;
+  overflow-x: hidden;
+  background: transparent;
+  max-width: var(--size);
+
+  & p {
+    position: relative;
+    width: max-content;
+    animation: 4s linear infinite alternate bounce;
+  }
 }
 
-.track-title-inner span {
-  display: inline-block;
-  padding-right: 100px;
+@keyframes bounce {
+  from,
+  10% { translate: 0; }
+  90%,
+  to { translate: min(0px, var(--size) - 100%); }
 }
-
-.track-title-inner span.scrolling {
-  animation: scrollText 5s ease-in-out infinite alternate;
-}
-
-@keyframes scrollText {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(calc(-51%)); }
-}
-
+  
 .track-time {
   opacity: 1;
   white-space: nowrap;
