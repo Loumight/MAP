@@ -518,6 +518,7 @@ body {
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
+
 .action-btn i {
   font-size: 24px;
 }
@@ -525,6 +526,19 @@ body {
 .action-btn:hover {
   transform: translateY(-1px);
   background: rgba(255, 255, 255, 0.3);
+}
+
+/* mi bombo i made another style called action button */
+.return {
+  width: 300px;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  align-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .button {

@@ -12,9 +12,9 @@ function playTrack(src, loop = true, vol = 0.5) {
   audio.volume = vol;
 
   //delay bcs its playing too quick
-  setTimeout(() => { 
-  audio.play().catch((e) => console.log("Autoplay blocked — click first"));
-  } , 1000);
+  setTimeout(() => {
+    audio.play().catch((e) => console.log("Autoplay blocked — click first"));
+  }, 1000);
 
   currentAudio = audio;
   updatePlayerUI(src);
@@ -35,7 +35,7 @@ const titleElement = document.getElementById("title");
 const trackTimeElement = document.getElementById("track-time");
 const progressFilled = document.querySelector(".progress-filled");
 // intarctive progress bar ?
-const progressBar = document.querySelector('.progress-bar');
+const progressBar = document.querySelector(".progress-bar");
 
 function updatePlayerUI(src) {
   if (!src) {
@@ -45,7 +45,7 @@ function updatePlayerUI(src) {
     playIcon.classList.replace("fa-pause", "fa-play");
     return;
   }
- 
+
   const filename = src.split("/").pop().replace(".mp3", "").replace(".wav", "");
   titleElement.textContent = filename;
   if (currentAudio) {
@@ -83,7 +83,6 @@ function seekTo(clickEvent) {
 
 // make it pauseable/playable space bar
 document.addEventListener("keydown", (e) => {
-
   if (e.code === "Space") {
     e.preventDefault();
     togglePlayPause();
@@ -94,7 +93,6 @@ playButton.addEventListener("click", () => {
   togglePlayPause();
 });
 
-
 function togglePlayPause() {
   if (!currentAudio) return;
   if (currentAudio.paused) {
@@ -104,7 +102,7 @@ function togglePlayPause() {
     currentAudio.pause();
     playIcon.classList.replace("fa-pause", "fa-play");
   }
-};
+}
 
 // COOLDOWN FOLK PLEASE I SUCK BUNS AT JS IM ACTUALLY GONNA LEARN TS CAUSE I DIDNT REALISE HOW BOOTY CHEEKS AI WAS HOLYYY//
 
@@ -135,8 +133,8 @@ document.addEventListener(
 // ========= DATA (FILL THESE IN) =========
 const stations = [
   {
-    id: "central",
-    name: "CENTRAL STATION",
+    id: "Plains",
+    name: "Verdant plains",
     time: "09:00",
     platform: "Plat. 1",
     stationImage: "img/legreen.png",
@@ -144,12 +142,12 @@ const stations = [
     outsideImage:
       "https://placehold.co/1920x1080/2a2a2a/999999?text=CENTRAL+YARD",
     outsideAudio: "mptree/sanic.wav",
-    outsideDesc: "Empty tracks. A single streetlamp. Distant city hum.",
+    outsideDesc: "MI BOMBOOOOooooo.....",
     tintColor: "#ffcf4a",
   },
   {
-    id: "cliffs",
-    name: "COASTAL CLIFFS",
+    id: "Abyss",
+    name: "Abyssopelagic Zone",
     time: "09:45",
     platform: "Plat. 3",
     stationImage:
@@ -158,7 +156,7 @@ const stations = [
     outsideImage:
       "https://placehold.co/1920x1080/3a6a5a/aaffcc?text=COASTAL+CLIFFS",
     outsideAudio: "",
-    outsideDesc: "Wind off the sea. Gulls circling. Infinite horizon.",
+    outsideDesc: "Fee Fi Fo Fum theres a giant siphonophore in your bum",
     tintColor: "#6ec8ff",
   },
   {
@@ -214,7 +212,7 @@ const transitionOverlay = document.getElementById("transitionOverlay");
 const stationContainer = document.getElementById("stationContainer");
 const outsideContainer = document.getElementById("outsideContainer");
 let pendingAction = null;
-let currentStationId = "central";
+let currentStationId = "Plains";
 
 // ========= GO TO STATION =========
 async function goToStation(targetStation, useTrain = false) {
@@ -350,8 +348,8 @@ function buildAllStations() {
     const allDepartureRows = [
       {
         img: "img/train1.png",
-        destId: "cliffs",
-        destName: "COASTAL CLIFFS",
+        destId: "Abyss",
+        destName: "Abyssopelagic Zone",
         time: "09:45",
         platform: "Plat. 3",
         status: "On Time",
@@ -386,8 +384,8 @@ function buildAllStations() {
       },
       {
         img: "img/train5.png",
-        destId: "central",
-        destName: "CENTRAL STATION",
+        destId: "Plains",
+        destName: "Verdant plains",
         time: "09:00",
         platform: "Plat. 1",
         status: "On Time",
@@ -499,8 +497,8 @@ function buildAllStations() {
     outsideDiv.style.backgroundImage = `url('${station.outsideImage}')`;
     outsideDiv.innerHTML = `
       <div class="outside-panel">
-        <p style="color:#ffffff; margin-bottom:12px;">🌲 ${station.outsideDesc}</p>
-        <button class="action-btn return-to-station-btn" data-id="${station.id}">🚪 BACK TO ${station.name}</button>
+        <p style="color:#ffffff; margin-bottom:12px;"> ${station.outsideDesc}</p>
+        <button class="return" data-id="${station.id}"> BACK TO ${station.name}</button>
       </div>
     `;
     outsideContainer.appendChild(outsideDiv);
@@ -538,7 +536,7 @@ function handleExit(stationId) {
 
 // ========= ATTACH RETURN BUTTONS =========
 function attachReturnButtons() {
-  document.querySelectorAll(".return-to-station-btn").forEach((btn) => {
+  document.querySelectorAll(".return").forEach((btn) => {
     const newBtn = btn.cloneNode(true);
     btn.parentNode.replaceChild(newBtn, btn);
     newBtn.addEventListener("click", handleReturnToStation);
@@ -606,16 +604,16 @@ function init() {
   attachExitEvents();
   attachReturnButtons();
 
-  // Start at central station
-  const centralStation = stations.find((s) => s.id === "central");
-  if (centralStation) {
-    const centralView = document.getElementById(`station_central`);
-    centralView.style.backgroundImage = `url('${centralStation.stationImage}')`;
-    if (centralStation.stationAudio && centralStation.stationAudio.trim()) {
-      playTrack(centralStation.stationAudio, true, 0.5);
+  // Start at Plains
+  const plainsStation = stations.find((s) => s.id === "Plains");
+  if (plainsStation) {
+    const plainsView = document.getElementById(`station_Plains`);
+    plainsView.style.backgroundImage = `url('${plainsStation.stationImage}')`;
+    if (plainsStation.stationAudio && plainsStation.stationAudio.trim()) {
+      playTrack(plainsStation.stationAudio, true, 0.5);
     }
-    centralView.classList.add("active-view");
-    currentStationId = "central";
+    plainsView.classList.add("active-view");
+    currentStationId = "Plains";
   }
 
   console.log(
