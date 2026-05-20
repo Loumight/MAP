@@ -14,6 +14,7 @@ function playTrack(src, loop = true, vol = 0.5) {
   //delay bcs its playing too quick
   setTimeout(() => {
     audio.play().catch((e) => console.log("Autoplay blocked — click first"));
+    audio.volume = 0.1; // VOLUME SET
   }, 1000);
 
   currentAudio = audio;
@@ -138,12 +139,11 @@ const stations = [
     time: "09:00",
     platform: "Plat. 1",
     stationImage: "img/legreen.png",
-    stationAudio: "mptree/temmylongnamefiletest.mp3",
-    outsideImage:
-      "https://placehold.co/1920x1080/2a2a2a/999999?text=CENTRAL+YARD",
+    stationAudio: "mptree/1temmylongnamefiletest.mp3",
+    outsideImage: "img/legreen.png",
     outsideAudio: "mptree/sanic.wav",
-    outsideDesc: "MI BOMBOOOOooooo.....",
-    tintColor: "#ffcf4a",
+    outsideDesc: "Fragments of what was once a great city",
+    tintColor: "#85b05a",
   },
   {
     id: "Abyss",
@@ -153,15 +153,14 @@ const stations = [
     stationImage:
       "https://preview.redd.it/i-am-so-excited-to-have-big-underwater-areas-v0-kz1o0qplm2mg1.png?width=1080&crop=smart&auto=webp&s=472a15dcb16115ec102adc786319795b456f7d25",
     stationAudio: "",
-    outsideImage:
-      "https://placehold.co/1920x1080/3a6a5a/aaffcc?text=COASTAL+CLIFFS",
+    outsideImage: "img/ORB.png",
     outsideAudio: "",
-    outsideDesc: "Fee Fi Fo Fum theres a giant siphonophore in your bum",
-    tintColor: "#6ec8ff",
+    outsideDesc: "The creatures here are obsessed with the idea of knowledge, the lower they go, the brighter they must glow.",
+    tintColor: "#27475a",
   },
   {
-    id: "forest",
-    name: "WHISPERING FOREST",
+    id: "plates",
+    name: "Convergent plates",
     time: "10:15",
     platform: "Plat. 5",
     stationImage:
@@ -170,27 +169,24 @@ const stations = [
     outsideImage:
       "https://placehold.co/1920x1080/2a5a3a/aaffaa?text=DEEP+FOREST",
     outsideAudio: "",
-    outsideDesc: "Sunlight through canopy. Moss and memory. Unseen footsteps.",
-    tintColor: "#7acc5e",
+    outsideDesc: "Gounds clashing in a spectacular display, no one really knows how the locals survive.",
+    tintColor: "#cc765e",
   },
   {
-    id: "park",
-    name: "ABANDONED PARK",
+    id: "maw",
+    name: "The maw",
     time: "11:00",
     platform: "Plat. 8",
-    stationImage:
-      "https://placehold.co/1920x1080/4a2a3a/cfaacc?text=PARK+STATION",
+    stationImage: "img/ORB.png",
     stationAudio: "",
-    outsideImage:
-      "https://placehold.co/1920x1080/5a3a4a/ffaacc?text=AMUSEMENT+PARK",
+    outsideImage: "img/ORB.png",
     outsideAudio: "",
-    outsideDesc:
-      "Ferris wheel frozen. Weeds through the tracks. Faint calliope.",
-    tintColor: "#d97a2b",
+    outsideDesc: "The ball wizards GREATEST CREATION, train here is always delayed because no one wants to go near the maw",
+    tintColor: "#869078",
   },
   {
     id: "lake",
-    name: "GLASS LAKE",
+    name: "Glass lake",
     time: "11:45",
     platform: "Plat. 5",
     stationImage:
@@ -199,7 +195,7 @@ const stations = [
     outsideImage:
       "https://placehold.co/1920x1080/3a5f8a/aaeeff?text=GLASS+LAKE",
     outsideAudio: "",
-    outsideDesc: "Mirror water. No ripples. No birds. Submerged chords.",
+    outsideDesc: "Staring at the lake for prolonged periods of time has been known to cause eyesight problems in some individuals",
     tintColor: "#88ccff",
   },
 ];
@@ -356,37 +352,37 @@ function buildAllStations() {
         statusColor: "#4caf50",
       },
       {
-        img: "img/train2.png",
-        destId: "forest",
-        destName: "WHISPERING FOREST",
-        time: "10:15",
+        img: "img/train4.png",
+        destId: "lake",
+        destName: "Glass lake",
+        time: "10:30",
         platform: "Plat. 5",
         status: "On Time",
         statusColor: "#4caf50",
       },
       {
-        img: "img/train3.png",
-        destId: "park",
-        destName: "ABANDONED PARK",
-        time: "11:00",
-        platform: "Plat. 8",
-        status: "Delayed",
-        statusColor: "#ff9800",
-      },
-      {
-        img: "img/train4.png",
-        destId: "lake",
-        destName: "GLASS LAKE",
+        img: "img/train2.png",
+        destId: "plates",
+        destName: "Convergent plates",
         time: "11:45",
         platform: "Plat. 5",
         status: "On Time",
         statusColor: "#4caf50",
       },
       {
+        img: "img/train3.png",
+        destId: "maw",
+        destName: "The maw",
+        time: "12:15",
+        platform: "Plat. 8",
+        status: "Delayed",
+        statusColor: "#ff9800",
+      },
+      {
         img: "img/train5.png",
         destId: "Plains",
         destName: "Verdant plains",
-        time: "09:00",
+        time: "13:30",
         platform: "Plat. 1",
         status: "On Time",
         statusColor: "#4caf50",
