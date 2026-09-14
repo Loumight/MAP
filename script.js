@@ -1,7 +1,7 @@
 // ========= AUDIO MANAGER =========
 let currentAudio = null;
 
-function playTrack(src, loop = true, vol = 0.5) {
+function playTrack(src, loop = true, vol = 1) {
   if (!src) return;
   if (currentAudio) {
     currentAudio.pause();
@@ -14,7 +14,7 @@ function playTrack(src, loop = true, vol = 0.5) {
   //delay bcs its playing too quick
   setTimeout(() => {
     audio.play().catch((e) => console.log("Autoplay blocked — click first"));
-    audio.volume = 0.1; // VOLUME SET
+    audio.volume = 0.4; // VOLUME SET
   }, 1000);
 
   currentAudio = audio;
@@ -139,10 +139,10 @@ const stations = [
     time: "09:00",
     platform: "Plat. 1",
     stationImage: "img/legreen.png",
-    stationAudio: "mptree/1temmylongnamefiletest.mp3",
+    stationAudio: "mptree/BounceRoom.mp3",
     outsideImage: "img/legreen.png",
-    outsideAudio: "mptree/sanic.wav",
-    outsideDesc: "Fragments of what was once a great city",
+    outsideAudio: "",
+    outsideDesc: "might put text here?",
     tintColor: "#85b05a",
   },
   {
@@ -151,11 +151,11 @@ const stations = [
     time: "09:45",
     platform: "Plat. 3",
     stationImage:
-      "https://preview.redd.it/i-am-so-excited-to-have-big-underwater-areas-v0-kz1o0qplm2mg1.png?width=1080&crop=smart&auto=webp&s=472a15dcb16115ec102adc786319795b456f7d25",
-    stationAudio: "",
-    outsideImage: "img/ORB.png",
-    outsideAudio: "",
-    outsideDesc: "The creatures here are obsessed with the idea of knowledge, the lower they go, the brighter they must glow.",
+      "img/ledark.webp",
+    stationAudio: "mptree/BounceRoom.mp3",
+    outsideImage: "img/abysszone.webp",
+    outsideAudio: "mptree/rainrain2.mp3",
+    outsideDesc: "might put text here?",
     tintColor: "#27475a",
   },
   {
@@ -164,12 +164,12 @@ const stations = [
     time: "10:15",
     platform: "Plat. 5",
     stationImage:
-      "https://oyster.ignimgs.com/mediawiki/apis.ign.com/hollow-knight-silksong/5/54/Hollow_Knight_Silksong_-_DeepDocksSecrets1.jpg",
-    stationAudio: "",
+      "img/lered.webp",
+    stationAudio: "mptree/BounceRoom.mp3",
     outsideImage:
       "https://placehold.co/1920x1080/2a5a3a/aaffaa?text=DEEP+FOREST",
     outsideAudio: "",
-    outsideDesc: "Gounds clashing in a spectacular display, no one really knows how the locals survive.",
+    outsideDesc: "might put text here?",
     tintColor: "#cc765e",
   },
   {
@@ -178,10 +178,10 @@ const stations = [
     time: "11:00",
     platform: "Plat. 8",
     stationImage: "img/ORB.png",
-    stationAudio: "",
+    stationAudio: "mptree/BounceRoom.mp3",
     outsideImage: "img/ORB.png",
     outsideAudio: "",
-    outsideDesc: "The ball wizards GREATEST CREATION, train here is always delayed because no one wants to go near the maw",
+    outsideDesc: "might put text here?",
     tintColor: "#869078",
   },
   {
@@ -190,12 +190,12 @@ const stations = [
     time: "11:45",
     platform: "Plat. 5",
     stationImage:
-      "https://placehold.co/1920x1080/2a3f5a/aacdff?text=LAKE+STATION",
-    stationAudio: "",
+      "img/leblue.webp",
+    stationAudio: "mptree/BounceRoom.mp3",
     outsideImage:
-      "https://placehold.co/1920x1080/3a5f8a/aaeeff?text=GLASS+LAKE",
-    outsideAudio: "",
-    outsideDesc: "Staring at the lake for prolonged periods of time has been known to cause eyesight problems in some individuals",
+      "img/eyesburn.webp",
+    outsideAudio: "mptree/Glass.mp3",
+    outsideDesc: "might put text here?",
     tintColor: "#88ccff",
   },
 ];

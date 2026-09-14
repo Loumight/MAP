@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>DVD YEAAA</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none;
+      }
+      .bg {
+        width: 100vw;
+        height: 100vh;
+        background: rgb(0, 0, 0);
+        position: relative;
+      }
+      .dvd {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        object-fit: contain;
+      }
+      .REDBOX {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg">
+      <img
+        class="dvd"
+        src=""
+        alt="DVD"
+      />
+      <div class="REDBOX"></div>
+    </div>
+ 
+  <script>
+    const dvd = document.querySelector('.REDBOX');
+    
+    let x = 0, y = 0;
+    let speedX = 10, speedY = 8;
+    let dvdWidth = 50, dvdHeight = 50; // Adjust to your image
+    
+    function bounce() {
+      // Move
+      x += speedX;
+      y += speedY;
+      
+      // Screen boundaries
+      const maxX = window.innerWidth - dvdWidth;
+      const maxY = window.innerHeight - dvdHeight;
+      
+      // Bounce off walls
+      if (x >= maxX || x <= 0) {
+        speedX = -speedX;
+        x = Math.min(Math.max(x, 0), maxX);
+      }
+      if (y >= maxY || y <= 0) {
+        speedY = -speedY;
+        y = Math.min(Math.max(y, 0), maxY);
+      }
+      
+      // Update position
+      dvd.style.left = x + 'px';
+      dvd.style.top = y + 'px';
+      
+      requestAnimationFrame(bounce);
+    }
+    
+    bounce();
+  </script>
+</body>
+</html>
