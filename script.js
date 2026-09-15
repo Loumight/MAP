@@ -138,9 +138,9 @@ const stations = [
     name: "Verdant plains",
     time: "09:00",
     platform: "Plat. 1",
-    stationImage: "img/legreen.png",
+    stationImage: "img/greenroom.webp",
     stationAudio: "mptree/BounceRoom.mp3",
-    outsideImage: "img/legreen.png",
+    outsideImage: "img/lnikus.webp",
     outsideAudio: "",
     outsideDesc: "might put text here?",
     tintColor: "#85b05a",
@@ -151,9 +151,9 @@ const stations = [
     time: "09:45",
     platform: "Plat. 3",
     stationImage:
-      "img/ledark.webp",
+      "img/greenroom.webp",
     stationAudio: "mptree/BounceRoom.mp3",
-    outsideImage: "img/abysszone.webp",
+    outsideImage: "img/abyss.webp",
     outsideAudio: "mptree/rainrain2.mp3",
     outsideDesc: "might put text here?",
     tintColor: "#27475a",
@@ -164,7 +164,7 @@ const stations = [
     time: "10:15",
     platform: "Plat. 5",
     stationImage:
-      "img/lered.webp",
+      "img/greenroom.webp",
     stationAudio: "mptree/BounceRoom.mp3",
     outsideImage:
       "https://placehold.co/1920x1080/2a5a3a/aaffaa?text=DEEP+FOREST",
@@ -177,7 +177,7 @@ const stations = [
     name: "The maw",
     time: "11:00",
     platform: "Plat. 8",
-    stationImage: "img/ORB.png",
+    stationImage: "img/greenroom.webp",
     stationAudio: "mptree/BounceRoom.mp3",
     outsideImage: "img/ORB.png",
     outsideAudio: "",
@@ -190,7 +190,7 @@ const stations = [
     time: "11:45",
     platform: "Plat. 5",
     stationImage:
-      "img/leblue.webp",
+      "img/whiteroom.webp",
     stationAudio: "mptree/BounceRoom.mp3",
     outsideImage:
       "img/eyesburn.webp",
