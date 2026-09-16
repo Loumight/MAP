@@ -139,10 +139,10 @@ const stations = [
     time: "09:00",
     platform: "Plat. 1",
     stationImage: "img/greenroom.webp",
-    stationAudio: "mptree/BounceRoom.mp3",
+    stationAudio: "mptree/Station.mp3",
     outsideImage: "img/lnikus.webp",
-    outsideAudio: "",
-    outsideDesc: "might put text here?",
+    outsideAudio: "mptree/Verdant.mp3",
+    outsideDesc: "Ruins of a once thriving kingdom.",
     tintColor: "#85b05a",
   },
   {
@@ -152,24 +152,24 @@ const stations = [
     platform: "Plat. 3",
     stationImage:
       "img/greenroom.webp",
-    stationAudio: "mptree/BounceRoom.mp3",
+    stationAudio: "mptree/Station.mp3",
     outsideImage: "img/abyss.webp",
-    outsideAudio: "mptree/rainrain2.mp3",
-    outsideDesc: "might put text here?",
+    outsideAudio: "mptree/Abyss.mp3",
+    outsideDesc: "A giant sinkhole leading to the deepest parts of the ocean.",
     tintColor: "#27475a",
   },
   {
     id: "plates",
-    name: "Convergent plates",
+    name: "Nocturnal dunes",
     time: "10:15",
     platform: "Plat. 5",
     stationImage:
       "img/greenroom.webp",
-    stationAudio: "mptree/BounceRoom.mp3",
+    stationAudio: "mptree/Station.mp3",
     outsideImage:
-      "https://placehold.co/1920x1080/2a5a3a/aaffaa?text=DEEP+FOREST",
-    outsideAudio: "",
-    outsideDesc: "might put text here?",
+      "img/Evil.webp",
+    outsideAudio: "mptree/Evil.mp3",
+    outsideDesc: "A king trapped in eternal darkness, cursed to wander the dunes. (original image not mine, to be redawn)",
     tintColor: "#cc765e",
   },
   {
@@ -178,10 +178,10 @@ const stations = [
     time: "11:00",
     platform: "Plat. 8",
     stationImage: "img/greenroom.webp",
-    stationAudio: "mptree/BounceRoom.mp3",
+    stationAudio: "mptree/Station.mp3",
     outsideImage: "img/ORB.png",
     outsideAudio: "",
-    outsideDesc: "might put text here?",
+    outsideDesc: "OM NOM NOM I EAT UNFINISHED SONGS",
     tintColor: "#869078",
   },
   {
@@ -191,11 +191,11 @@ const stations = [
     platform: "Plat. 5",
     stationImage:
       "img/whiteroom.webp",
-    stationAudio: "mptree/BounceRoom.mp3",
+    stationAudio: "mptree/Station.mp3",
     outsideImage:
       "img/eyesburn.webp",
-    outsideAudio: "mptree/Glass.mp3",
-    outsideDesc: "might put text here?",
+    outsideAudio: "mptree/Glasslake.mp3",
+    outsideDesc: "A lake of glass, a reflection of the self. A place of introspection and clarity. (Draft drawing to be REPLACED)",
     tintColor: "#88ccff",
   },
 ];
@@ -345,7 +345,7 @@ function buildAllStations() {
       {
         img: "img/train1.png",
         destId: "Abyss",
-        destName: "Abyssopelagic Zone",
+        destName: "Abyssopelagic zone",
         time: "09:45",
         platform: "Plat. 3",
         status: "On Time",
@@ -363,7 +363,7 @@ function buildAllStations() {
       {
         img: "img/train2.png",
         destId: "plates",
-        destName: "Convergent plates",
+        destName: "Nocturnal dunes",
         time: "11:45",
         platform: "Plat. 5",
         status: "On Time",
@@ -494,7 +494,7 @@ function buildAllStations() {
     outsideDiv.innerHTML = `
       <div class="outside-panel">
         <p style="color:#ffffff; margin-bottom:12px;"> ${station.outsideDesc}</p>
-        <button class="return" data-id="${station.id}"> BACK TO ${station.name}</button>
+        <button class="return" data-id="${station.id}"> Return to: ${station.name}</button>
       </div>
     `;
     outsideContainer.appendChild(outsideDiv);
