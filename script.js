@@ -201,7 +201,7 @@ const stations = [
 ];
 
 // Default map image
-const defaultMapImage = "img/lemap.png";
+const defaultMapImage = "img/mappy.webp";
 
 // ========= GLOBAL VARIABLES =========
 const transitionOverlay = document.getElementById("transitionOverlay");
